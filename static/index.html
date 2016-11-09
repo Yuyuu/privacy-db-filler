@@ -13,29 +13,35 @@
         <form name="vm.cardForm" ng-submit="vm.createCard(vm.card)">
             <div class="form-group">
                 <label for="yellowInput">Yellow</label>
-                <input type="text" class="form-control" id="yellowInput" required="" ng-model="vm.card.yellow">
+                <input type="text" class="form-control" id="yellowInput" required="" ng-model="vm.card.yellow"
+                       ng-disabled="vm.loading">
             </div>
             <div class="form-group">
                 <label for="purpleInput">Purple</label>
-                <input type="text" class="form-control" id="purpleInput" required="" ng-model="vm.card.purple">
+                <input type="text" class="form-control" id="purpleInput" required="" ng-model="vm.card.purple"
+                       ng-disabled="vm.loading">
             </div>
             <div class="form-group">
                 <label for="greenInput">Green</label>
-                <input type="text" class="form-control" id="greenInput" required="" ng-model="vm.card.green">
+                <input type="text" class="form-control" id="greenInput" required="" ng-model="vm.card.green"
+                       ng-disabled="vm.loading">
             </div>
             <div class="form-group">
                 <label for="redInput">Red</label>
-                <input type="text" class="form-control" id="redInput" required="" ng-model="vm.card.red">
+                <input type="text" class="form-control" id="redInput" required="" ng-model="vm.card.red"
+                       ng-disabled="vm.loading">
             </div>
             <div class="form-group">
                 <label for="blueInput">Blue</label>
-                <input type="text" class="form-control" id="blueInput" required="" ng-model="vm.card.blue">
+                <input type="text" class="form-control" id="blueInput" required="" ng-model="vm.card.blue"
+                       ng-disabled="vm.loading">
             </div>
             <div class="form-group">
                 <label for="blackInput">Black</label>
-                <input type="text" class="form-control" id="blackInput" required="" ng-model="vm.card.black">
+                <input type="text" class="form-control" id="blackInput" required="" ng-model="vm.card.black"
+                       ng-disabled="vm.loading">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="vm.loading">Submit</button>
         </form>
     </div>
 </div>
@@ -48,10 +54,13 @@
         var vm = this;
 
         this.createCard = function (card) {
+            vm.loading = true;
             $http.post('/api/cards', card)
-                .then(function () { vm.card = {}; });
+                .then(function () { vm.card = {}; })
+                .finally(function () { vm.loading = false; });
         };
     });
+
 </script>
 </body>
 </html>
