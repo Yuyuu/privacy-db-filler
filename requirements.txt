@@ -1,0 +1,2 @@
+Flask==0.10.1
+-e git+https://github.com/ze-phyr-us/linkenv.git#egg=linkenv

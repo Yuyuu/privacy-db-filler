@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Privacy DB Filler</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+<div ng-app="privacy">
+    <div class="container" ng-controller="IndexController as vm">
+        <form name="vm.cardForm" ng-submit="vm.createCard(vm.card)">
+            <div class="form-group">
+                <label for="yellowInput">Yellow</label>
+                <input type="text" class="form-control" id="yellowInput" required="" ng-model="vm.card.yellow">
+            </div>
+            <div class="form-group">
+                <label for="purpleInput">Purple</label>
+                <input type="text" class="form-control" id="purpleInput" required="" ng-model="vm.card.purple">
+            </div>
+            <div class="form-group">
+                <label for="greenInput">Green</label>
+                <input type="text" class="form-control" id="greenInput" required="" ng-model="vm.card.green">
+            </div>
+            <div class="form-group">
+                <label for="redInput">Red</label>
+                <input type="text" class="form-control" id="redInput" required="" ng-model="vm.card.red">
+            </div>
+            <div class="form-group">
+                <label for="blueInput">Blue</label>
+                <input type="text" class="form-control" id="blueInput" required="" ng-model="vm.card.blue">
+            </div>
+            <div class="form-group">
+                <label for="blackInput">Black</label>
+                <input type="text" class="form-control" id="blackInput" required="" ng-model="vm.card.black">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script>
+    var privacyModule = angular.module('privacy', []);
+
+    privacyModule.controller('IndexController', function ($http) {
+        var vm = this;
+
+        this.createCard = function (card) {
+            $http.post('/api/cards', card)
+                .then(function () { vm.card = {}; });
+        };
+    });
+</script>
+</body>
+</html>
