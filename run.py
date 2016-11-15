@@ -1,4 +1,4 @@
 from main import app
 
 if __name__ == '__main__':
-    app.start(8089)
+    app.run(port=8089)
